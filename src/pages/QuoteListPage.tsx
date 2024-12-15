@@ -1,14 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getQuotes } from '../api/quotes.ts';
-
-interface Quote {
-    id: string;
-    text: string;
-    mediaUrl: string;
-    username: string;
-    created_at: string;
-}
+import { Quote } from '../types/index';
 
 const QuoteListPage: React.FC = () => {
     const [quotes, setQuotes] = useState<Quote[]>([]);
@@ -50,8 +43,6 @@ const QuoteListPage: React.FC = () => {
 
         if (node) observer.current.observe(node);
     };
-
-    console.log(quotes);
 
 
     return (

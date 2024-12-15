@@ -10,11 +10,19 @@ export const getQuotes = async (token: string, limit: number, offset: number) =>
     return response.data;
 };
 
-export const createQuote = async (token: string, text: string, mediaUrl: string) => {
-    const response = await axios.post(
-        `${BASE_URL}/postQuote`,
-        { text, mediaUrl },
-        { headers: { Authorization: token, 'Content-Type': 'application/json' } }
-    );
-    return response.data;
+export const createQuote = async (token: string | null, quoteData: { text: string; mediaUrl: string }) => {
+    const response = await fetch('https://assignment.stage.crafto.app/postQuote', {
+        method: 'POST',
+        headers: {
+            'Authorization': token || '',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(quoteData),
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to create quote');
+    }
+
+    return response.json();
 };

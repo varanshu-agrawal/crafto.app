@@ -1,14 +1,20 @@
-import axios from 'axios';
+export const uploadMedia = async (file: File): Promise<string | null> => {
+    try {
+        const formData = new FormData();
+        formData.append('file', file);
 
-export const uploadImage = async (file: File) => {
-    const formData = new FormData();
-    formData.append('file', file);
+        const response = await fetch('https://crafto.app/crafto/v1.0/media/assignment/upload', {
+            method: 'POST',
+            body: formData,
+        });
 
-    const response = await axios.post(
-        'https://crafto.app/crafto/v1.0/media/assignment/upload',
-        formData,
-        { headers: { 'Content-Type': 'multipart/form-data' } }
-    );
+        if (!response.ok) {
+            throw new Error('Media upload failed');
+        }
 
-    return response.data.mediaUrl; // Assuming mediaUrl is returned
+        const data = await response.json();
+        return data?.[0]?.url || null;
+    } catch (error) {
+        return null
+    }
 };

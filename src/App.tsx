@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage.tsx';
-import QuotesPage from './pages/QuotesPage.tsx';
 import CreateQuotePage from './pages/CreateQuotePage.tsx';
 import "./App.css"
 import QuoteListPage from './pages/QuoteListPage.tsx';
