@@ -3,5 +3,6 @@ export interface Quote {
     text: string;
     mediaUrl: string;
     username: string;
-    created_at: string;
+    createdAt: string;
+    updatedAt: string;
 }
